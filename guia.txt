@@ -1,0 +1,35 @@
+-- comandos dotnet
+
+    criar novo  projeto: dotnet new webapi
+    rodar o projeto: dotnet run
+    assistir arquivos e auto compilar caso seja modificado: watch
+
+
+-- add swagger
+
+    buscar: Swashbuckle.AspNetCore 1.1.0 
+
+    instalar: dotnet add package Swashbuckle.AspNetCore --version 1.1.0
+
+    services.AddMvc();
+
+    services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    });
+
+    ---------
+
+    app.UseSwagger();
+
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    });
+
+-- redirect url
+
+var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+
+            app.UseRewriter(option);
