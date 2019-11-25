@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using ProjetoWebVale.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace ProjetoWebVale
 {
@@ -27,6 +30,11 @@ namespace ProjetoWebVale
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // using Microsoft.EntityFrameworkCore;
+            services.AddDbContext<ProjetoWebValeDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+            
+
             services.AddMvc();
 
             services.AddSwaggerGen(c =>

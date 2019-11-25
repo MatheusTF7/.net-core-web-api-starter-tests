@@ -1,4 +1,4 @@
-namespace ProjetoWebVale.Models
+namespace ProjetoWebVale.Utils
 {
     public class Erro
     {

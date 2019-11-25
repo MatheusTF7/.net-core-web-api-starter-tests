@@ -1,9 +1,11 @@
 -- comandos dotnet
 
+    dotnet -h
+    dotnet new -h
     criar novo  projeto: dotnet new webapi
     rodar o projeto: dotnet run
     assistir arquivos e auto compilar caso seja modificado: watch
-
+    restaurar pacotes do projeto: dotnet restore
 
 -- add swagger
 
@@ -29,7 +31,25 @@
 
 -- redirect url
 
-var option = new RewriteOptions();
-            option.AddRedirect("^$", "swagger");
+    var option = new RewriteOptions();
+                option.AddRedirect("^$", "swagger");
 
-            app.UseRewriter(option);
+                app.UseRewriter(option);
+
+-- Adicionando MySql Server a nossa webapi
+
+    instalar o pacote do Pamelo:
+    dotnet add package Pomelo.EntityFrameworkCore.MySql --version 2.2.6
+
+-- Fazendo alterações no modelo
+
+    - Convenções - Infere propriedades e características com base na convenção padrão
+    - Anotações - Usa DataAnnotations para adicionar características
+    - Fluent API - Usa Configurações em tempo de execução para adicionar características
+
+
+-- comandos EntityFrameworkCore
+
+    add migration: dotnet ef migrations add nome_da_migration
+    remover a última migration: dotnet ef migrations remove
+    atualizar o banco: dotnet ef database update
