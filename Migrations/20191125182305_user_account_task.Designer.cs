@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoWebVale.Models;
 
 namespace ProjetoWebVale.Migrations
 {
     [DbContext(typeof(ProjetoWebValeDbContext))]
-    partial class ProjetoWebValeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191125182305_user_account_task")]
+    partial class user_account_task
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

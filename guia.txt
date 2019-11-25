@@ -44,8 +44,20 @@
 -- Fazendo alterações no modelo
 
     - Convenções - Infere propriedades e características com base na convenção padrão
+
     - Anotações - Usa DataAnnotations para adicionar características
+        using System.ComponentModel.DataAnnotations;
+        [Required]
+        [MaxLength(255)]
+        [ForeignKey("Nome_da_propriedade_chave")]
+
     - Fluent API - Usa Configurações em tempo de execução para adicionar características
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Criar chave composta -> Composite Key
+            modelBuilder.Entity<Nome_da_Entidade>()
+                .HasKey(c => new { c.Chave_1, c.Chave_2 });
+        }
 
 
 -- comandos EntityFrameworkCore
