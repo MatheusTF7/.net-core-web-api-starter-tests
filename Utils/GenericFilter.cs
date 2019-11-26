@@ -4,8 +4,10 @@ namespace ProjetoWebVale.Utils
     {
          public long? Id { get; set; } = null;
 
-        //  public int Page { get; set; }
+         public int Page { get; set; } = 1;
 
-        //  public int PageSize { get; set; }
+         public int PageSize { get; set; } = 5;
+
+         public bool? getAll { get; set; } = false;
     }
 }

@@ -38,6 +38,10 @@ namespace teams_back.Controllers
                 query = query.Where(c => c.Id == filter.Id.Value);
 
             result.TotalItems = await query.CountAsync();
+            
+            if (filter.getAll != true)
+                query = query.ApplyPaging(filter);
+
             result.Items = await query.ToListAsync();
 
             return Ok(result);
