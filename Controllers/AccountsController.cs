@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjetoWebVale.Filter;
 using ProjetoWebVale.Models;
+using ProjetoWebVale.Utils;
 
 namespace teams_back.Controllers
 {
@@ -22,28 +24,23 @@ namespace teams_back.Controllers
 
         // GET: api/Accounts
         [HttpGet]
-        public IEnumerable<Account> GetAccount()
-        {
-            return _context.Account.ToList();
-        }
-
-        // GET: api/Accounts/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetAccount([FromRoute] long id)
+        public async Task<IActionResult> GetAccount(AccountFilter filter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var account = await _context.Account.SingleOrDefaultAsync(m => m.Id == id);
+            var result = new QueryResult<Account>();
+            var query = _context.Account.AsQueryable();
 
-            if (account == null)
-            {
-                return NotFound();
-            }
+            if (filter.Id.HasValue)
+                query = query.Where(c => c.Id == filter.Id.Value);
 
-            return Ok(account);
+            result.TotalItems = await query.CountAsync();
+            result.Items = await query.ToListAsync();
+
+            return Ok(result);
         }
 
         // PUT: api/Accounts/5

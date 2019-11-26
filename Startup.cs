@@ -43,18 +43,18 @@ namespace ProjetoWebVale
                 {
                     Version = "v1",
                     Title = "Projeto Web Vale Livre",
-                    Description = "A simple example ASP.NET Core Web API",
-                    TermsOfService = "https://example.com/terms",
+                    Description = "A simple example ASP.NET Core Web API with Entity Framwork Core using MySql. This Web API manages tasks associated with an account.",
+                    TermsOfService = "https://github.com/MatheusTF7/ProjetoWebVale/blob/master/LICENSE",
                     Contact = new Contact
                     {
                         Name = "Matheus Gurgel",
                         Email = "matheuskillua77@gmail.com",
-                        Url = "https://twitch.tv/matheustf7",
+                        Url = "https://github.com/MatheusTF7/ProjetoWebVale",
                     },
                     License = new License
                     {
-                        Name = "Use under MIT",
-                        Url = "https://example.com/license",
+                        Name = "Use under MIT license",
+                        Url = "https://github.com/MatheusTF7/ProjetoWebVale/blob/master/LICENSE",
                     }
                 });
             });

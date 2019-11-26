@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjetoWebVale.Filter;
 using ProjetoWebVale.Models;
+using ProjetoWebVale.Utils;
 
 namespace teams_back.Controllers
 {
@@ -22,28 +24,23 @@ namespace teams_back.Controllers
 
         // GET: api/Tasks
         [HttpGet]
-        public IEnumerable<ProjetoWebVale.Models.Task> GetTask()
-        {
-            return _context.Task.ToList();
-        }
-
-        // GET: api/Tasks/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetTask([FromRoute] long id)
+        public async Task<IActionResult> GetTask(TaskFilter filter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var Task = await _context.Task.SingleOrDefaultAsync(m => m.Id == id);
+            var result = new QueryResult<ProjetoWebVale.Models.Task>();
+            var query = _context.Task.AsQueryable();
 
-            if (Task == null)
-            {
-                return NotFound();
-            }
+            if (filter.Id.HasValue)
+                query = query.Where(c => c.Id == filter.Id.Value);
 
-            return Ok(Task);
+            result.TotalItems = await query.CountAsync();
+            result.Items = await query.ToListAsync();
+
+            return Ok(result);
         }
 
         // PUT: api/Tasks/5

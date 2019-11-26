@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjetoWebVale.Filter;
 using ProjetoWebVale.Models;
+using ProjetoWebVale.Utils;
 
 namespace teams_back.Controllers
 {
@@ -22,28 +24,23 @@ namespace teams_back.Controllers
 
         // GET: api/Users
         [HttpGet]
-        public IEnumerable<User> GetUser()
-        {
-            return _context.User.ToList();
-        }
-
-        // GET: api/Users/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUser([FromRoute] long id)
+        public async Task<IActionResult> GetUser(UserFilter filter)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var User = await _context.User.SingleOrDefaultAsync(m => m.Id == id);
+            var result = new QueryResult<User>();
+            var query = _context.User.AsQueryable();
 
-            if (User == null)
-            {
-                return NotFound();
-            }
+            if (filter.Id.HasValue)
+                query = query.Where(c => c.Id == filter.Id.Value);
 
-            return Ok(User);
+            result.TotalItems = await query.CountAsync();
+            result.Items = await query.ToListAsync();
+
+            return Ok(result);
         }
 
         // PUT: api/Users/5

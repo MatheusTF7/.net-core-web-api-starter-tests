@@ -65,3 +65,8 @@
     add migration: dotnet ef migrations add nome_da_migration
     remover a última migration: dotnet ef migrations remove
     atualizar o banco: dotnet ef database update
+
+-- evitar loops no Json
+    services.AddMvc().AddJsonOptions(
+        options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        );
