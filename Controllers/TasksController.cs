@@ -37,6 +37,12 @@ namespace teams_back.Controllers
             if (filter.Id.HasValue)
                 query = query.Where(c => c.Id == filter.Id.Value);
 
+            if (filter.AccountId.HasValue)
+                query = query.Where(c => c.AccountId == filter.AccountId);
+
+            if (filter.UserId.HasValue)
+                query = query.Where(c => c.AccountId == filter.UserId);
+
             result.PagingData.Page = filter.Page;
             result.PagingData.PageSize = filter.PageSize;
             result.PagingData.TotalItems = await query.CountAsync();

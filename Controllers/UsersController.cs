@@ -52,6 +52,15 @@ namespace teams_back.Controllers
             return Ok(result);
         }
 
+        [HttpPost("login")]
+        public IActionResult Post([FromBody] UserLogin user) {
+            var userLogin = _context.User.FirstOrDefault(c => c.Username == user.Username && c.Password == user.Password);
+            if (userLogin != null)
+                return Ok(new { message = "Login efetuado com sucesso"});
+            else return BadRequest(new { message = "Informações inválidas"});
+        }
+        
+
         // PUT: api/Users/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser([FromRoute] long id, [FromBody] User User)
@@ -95,6 +104,8 @@ namespace teams_back.Controllers
             {
                 return BadRequest(ModelState);
             }
+
+            User.Password = User.NewPassword;
 
             _context.User.Add(User);
             await _context.SaveChangesAsync();
