@@ -8,5 +8,7 @@ namespace ProjetoWebVale.Filter
         public long? AccountId { get; set; }
 
         public long? UserId { get; set; }
+
+        public bool? IsDone { get; set; }
     }
 }

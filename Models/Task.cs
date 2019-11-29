@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
+using ProjetoWebVale.Utils;
 
 namespace ProjetoWebVale.Models
 {
@@ -15,6 +16,24 @@ namespace ProjetoWebVale.Models
         public string Description { get; set; }
 
         public DateTime? DateStart { get; set; }
+
+        [NotMapped]
+        public string DateStartPtbr
+        {
+            get
+            {
+                return this.DateStart.ToString_ddMMyyyy();
+            }
+        }
+
+        [NotMapped]
+        public string DateEndPtbr
+        {
+            get
+            {
+                return this.DateEnd.ToString_ddMMyyyy();
+            }
+        }
 
         public DateTime? DateEnd { get; set; }
 
