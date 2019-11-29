@@ -30,16 +30,21 @@ namespace ProjetoWebVale
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             // using Microsoft.EntityFrameworkCore;
             services.AddDbContext<ProjetoWebValeDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-            
+
 
             services.AddMvc();
 
+            services.AddMvc().AddJsonOptions(
+               options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+              );
+
             services.AddSwaggerGen(c =>
             {
-               c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
                     Title = "Projeto Web Vale Livre",
@@ -84,6 +89,13 @@ namespace ProjetoWebVale
             option.AddRedirect("^$", "swagger");
 
             app.UseRewriter(option);
+
+            app.UseCors(
+                options => options
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            );
 
             // app.UseHttpsRedirection();
             app.UseMvc();

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace teams_back.Controllers
         }
 
         // GET: api/Accounts
+        [EnableCors("AnotherPolicy")]
         [HttpGet]
         public async Task<IActionResult> GetAccount(AccountFilter filter)
         {
@@ -32,10 +34,10 @@ namespace teams_back.Controllers
             }
 
             var result = new QueryResult<Account>();
-            var query = _context.Account.AsQueryable();
+            var query = _context.Account.Include(c => c.Users).AsQueryable();
 
             if (filter.Id.HasValue)
-                query = query.Where(c => c.Id == filter.Id.Value);
+                query = query.Include(c => c.Users).Where(c => c.Id == filter.Id.Value);
 
             result.PagingData.Page = filter.Page;
             result.PagingData.PageSize = filter.PageSize;
@@ -53,6 +55,7 @@ namespace teams_back.Controllers
         }
 
         // PUT: api/Accounts/5
+        [EnableCors("AnotherPolicy")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount([FromRoute] long id, [FromBody] Account account)
         {
@@ -88,6 +91,7 @@ namespace teams_back.Controllers
         }
 
         // POST: api/Accounts
+        [EnableCors("AnotherPolicy")] 
         [HttpPost]
         public async Task<IActionResult> PostAccount([FromBody] Account account)
         {
@@ -103,6 +107,7 @@ namespace teams_back.Controllers
         }
 
         // DELETE: api/Accounts/5
+        [EnableCors("AnotherPolicy")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount([FromRoute] long id)
         {

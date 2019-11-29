@@ -19,7 +19,7 @@ namespace ProjetoWebVale.Models
         public string Username { get; set; }
 
         [JsonIgnore]
-        [Required]
+        // [Required]
         [MaxLength(256)]
         public string Password { get; set; }
 
@@ -27,5 +27,11 @@ namespace ProjetoWebVale.Models
         public string NewPassword { get; set; }
 
         // public string Type { get; set; }
+
+        public long AccountId { get; set; }
+
+        // [JsonIgnore]
+        [ForeignKey("AccountId")]
+        public Account Account { get; set; }
     }
 }

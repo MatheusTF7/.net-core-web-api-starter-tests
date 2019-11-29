@@ -17,7 +17,7 @@
 
     services.AddSwaggerGen(c =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+        c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
     });
 
     ---------
@@ -40,6 +40,15 @@
 
     instalar o pacote do Pamelo:
     dotnet add package Pomelo.EntityFrameworkCore.MySql --version 2.2.6
+
+    startup.cs
+    services.AddDbContext<ProjetoWebValeDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+
+    appsettings.json
+    "ConnectionStrings": {
+        "DefaultConnection": "server=localhost;port=3306;database=webvaledb;uid=root;password=onepiece"
+    },
 
 -- Fazendo alterações no modelo
 
