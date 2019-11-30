@@ -24,7 +24,6 @@ namespace teams_back.Controllers
         }
 
         // GET: api/Users
-        [EnableCors("AnotherPolicy")] 
         [HttpGet]
         public async Task<IActionResult> GetUser(UserFilter filter)
         {
@@ -56,7 +55,6 @@ namespace teams_back.Controllers
             return Ok(result);
         }
 
-        [EnableCors("AnotherPolicy")] 
         [HttpPost("login")]
         public IActionResult Post([FromBody] UserLogin user) {
             var userLogin = _context.User.FirstOrDefault(c => c.Username == user.Username && c.Password == user.Password);
@@ -66,8 +64,7 @@ namespace teams_back.Controllers
         }
         
 
-        // PUT: api/Users/5
-        [EnableCors("AnotherPolicy")] 
+        // PUT: api/Users/5 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser([FromRoute] long id, [FromBody] User User)
         {
@@ -103,7 +100,6 @@ namespace teams_back.Controllers
         }
 
         // POST: api/Users
-        [EnableCors("AnotherPolicy")] 
         [HttpPost]
         public async Task<IActionResult> PostUser([FromBody] User User)
         {
@@ -121,7 +117,6 @@ namespace teams_back.Controllers
         }
 
         // DELETE: api/Users/5
-        [EnableCors("AnotherPolicy")] 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser([FromRoute] long id)
         {

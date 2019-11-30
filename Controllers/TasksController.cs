@@ -24,7 +24,6 @@ namespace teams_back.Controllers
         }
 
         // GET: api/Tasks
-        [EnableCors("AnotherPolicy")] 
         [HttpGet]
         public async Task<IActionResult> GetTask(TaskFilter filter)
         {
@@ -66,7 +65,6 @@ namespace teams_back.Controllers
         }
 
         // PUT: api/Tasks/5
-        [EnableCors("AnotherPolicy")] 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTask([FromRoute] long id, [FromBody] ProjetoWebVale.Models.Task Task)
         {
@@ -102,7 +100,6 @@ namespace teams_back.Controllers
         }
 
         // POST: api/Tasks
-        [EnableCors("AnotherPolicy")]
         [HttpPost]
         public async Task<IActionResult> PostTask([FromBody] ProjetoWebVale.Models.Task Task)
         {
@@ -118,7 +115,6 @@ namespace teams_back.Controllers
         }
 
         // DELETE: api/Tasks/5
-        [EnableCors("AnotherPolicy")] 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask([FromRoute] long id)
         {

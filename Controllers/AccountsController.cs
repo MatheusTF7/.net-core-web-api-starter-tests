@@ -24,7 +24,6 @@ namespace teams_back.Controllers
         }
 
         // GET: api/Accounts
-        [EnableCors("AnotherPolicy")]
         [HttpGet]
         public async Task<IActionResult> GetAccount(AccountFilter filter)
         {
@@ -55,7 +54,6 @@ namespace teams_back.Controllers
         }
 
         // PUT: api/Accounts/5
-        [EnableCors("AnotherPolicy")]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount([FromRoute] long id, [FromBody] Account account)
         {
@@ -91,7 +89,6 @@ namespace teams_back.Controllers
         }
 
         // POST: api/Accounts
-        [EnableCors("AnotherPolicy")] 
         [HttpPost]
         public async Task<IActionResult> PostAccount([FromBody] Account account)
         {
@@ -107,7 +104,6 @@ namespace teams_back.Controllers
         }
 
         // DELETE: api/Accounts/5
-        [EnableCors("AnotherPolicy")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount([FromRoute] long id)
         {
