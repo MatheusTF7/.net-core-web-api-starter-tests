@@ -30,7 +30,7 @@ namespace ProjetoWebVale.Models
 
         public long AccountId { get; set; }
 
-        // [JsonIgnore]
+        [JsonIgnore]
         [ForeignKey("AccountId")]
         public Account Account { get; set; }
     }

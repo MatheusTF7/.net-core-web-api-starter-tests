@@ -42,13 +42,13 @@ namespace ProjetoWebVale.Models
 
         public long AccountId { get; set; }
 
-        // [JsonIgnore]
+        [JsonIgnore]
         [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
 
         public long UserId { get; set; }
 
-        // [JsonIgnore]
+        [JsonIgnore]
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
 

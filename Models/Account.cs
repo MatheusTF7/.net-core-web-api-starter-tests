@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace ProjetoWebVale.Models
 {
@@ -12,6 +13,7 @@ namespace ProjetoWebVale.Models
         [MaxLength(100)]
         public string Initials { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }
 }
